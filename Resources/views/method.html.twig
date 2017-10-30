@@ -67,6 +67,7 @@
                             <th>Requirement</th>
                             <th>Type</th>
                             <th>Description</th>
+                            <th>In (body/head)</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -76,6 +77,7 @@
                                 <td>{{ infos.requirement is defined ? infos.requirement : ''}}</td>
                                 <td>{{ infos.dataType is defined ? infos.dataType : ''}}</td>
                                 <td>{{ infos.description is defined ? infos.description : ''}}</td>
+                                <td>{{ infos.method is defined ? infos.method : 'head'}}</td>
                             </tr>
                         {% endfor %}
                     </tbody>
@@ -243,9 +245,13 @@
                                     <h4>Requirements</h4>
                                     {% for name, infos in data.requirements %}
                                         <p class="tuple">
-                                            <input type="text" class="key" value="{{ name }}" placeholder="Key" />
+                                            <input type="text" class="key" value="{{ name }}" placeholder="Key"
+                                                   data-method="{{ infos.method }}"/>
                                             <span>=</span>
-                                            <input type="text" class="value" placeholder="{% if infos.description is defined %}{{ infos.description }}{% else %}Value{% endif %}" {% if infos.default is defined %} value="{{ infos.default }}" {% endif %}/> <span class="remove">-</span>
+                                            <input type="text" class="value"
+                                                   placeholder="{% if infos.description is defined %}{{ infos.description }}{% else %}Value{% endif %}" {% if infos.default is defined %} value="{{ infos.default }}" {% endif %}
+                                                   data-method="{{ infos.method }}"/>
+                                            <span class="remove">-</span>
                                         </p>
                                     {% endfor %}
                                 {% endif %}

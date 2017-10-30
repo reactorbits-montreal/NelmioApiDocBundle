@@ -551,7 +551,17 @@
                         }
                     });
 
+                    // retrieve all requires with head method
+                    $('.parameters .tuple', $(this)).each(function () {
+                        var key, value;
 
+                        key = $('.key', $(this)).val();
+                        value = $('.value', $(this)).val();
+
+                        if (value && $('.value', $(this)).data('method') === 'head') {
+                            filters[key] = value;
+                        }
+                    });
 
 
                     // retrieve the additional headers to send

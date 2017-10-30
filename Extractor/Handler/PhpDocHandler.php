@@ -52,6 +52,7 @@ class PhpDocHandler implements HandlerInterface
                     'requirement' => $value,
                     'dataType' => '',
                     'description' => '',
+                    'method' => 'head',
                 );
             }
 
@@ -97,13 +98,17 @@ class PhpDocHandler implements HandlerInterface
                         $requirements[$var]['requirement'] = '';
                     }
 
+                    if (!isset($requirements[$var]['method']) && !isset($annotationRequirements[$var]['method'])) {
+                        $requirements[$var]['method'] = 'head';
+                    }
+
                     $found = true;
                     break;
                 }
             }
 
             if (!isset($requirements[$var]) && false === $found) {
-                $requirements[$var] = array('requirement' => '', 'dataType' => '', 'description' => '');
+                $requirements[$var] = array('requirement' => '', 'dataType' => '', 'description' => '', 'method' => 'head');
             }
         }
 
